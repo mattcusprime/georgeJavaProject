@@ -14,6 +14,9 @@ import acm.util.*;
 import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
+/**I imported the random utility, never done this before so I'm guessing, in order to break up your nested loop (performance) and thus
+ * generate random brick colors for differentiated level creation */
+import java.util.Random;
 
 public class Breakout extends GraphicsProgram {
 
@@ -115,6 +118,39 @@ public class Breakout extends GraphicsProgram {
 					add(brick);
 				}
 			}
+		}
+	
+		/** Sets up the bricks with colors. */
+		private void bricksSetupv2Matt(){			
+				/**xStart is the x coordinate for the first brick on the base row */	
+			double xStart = (double) (getWidth() - ((NBRICKS_PER_ROW -1) * BRICK_SEP) - (NBRICKS_PER_ROW*BRICK_WIDTH))/2;
+				/**yStart is the y coordinate for the first brick on the base row */
+			double yStart = (double) (BRICK_Y_OFFSET + (BRICK_HEIGHT * (NBRICK_ROWS - 1))+((NBRICK_ROWS -1)*BRICK_SEP));
+			/**for (int i=0; i<10; i++){*/
+				for (int j=0; j < NBRICKS_PER_ROW; j++){
+					double x = xStart + (BRICK_WIDTH + BRICK_SEP)*j;
+					double y = yStart - (BRICK_HEIGHT + BRICK_SEP)*i;
+					G3DRect brick = new G3DRect(x,y,BRICK_WIDTH, BRICK_HEIGHT);					
+					/**switch (i){*/
+					Random randomGenerator = new Random(); 
+					int randomNum = randomGenerator.nextInt(10);
+					switch(randomNum)
+						case 0: brick.setColor(Color.CYAN);break;
+						case 1: brick.setColor(Color.CYAN);break;
+						case 2: brick.setColor(Color.GREEN);break;
+						case 3: brick.setColor(Color.GREEN);break;
+						case 4: brick.setColor(Color.YELLOW);break;
+						case 5: brick.setColor(Color.YELLOW);break;
+						case 6: brick.setColor(Color.ORANGE);break;
+						case 7: brick.setColor(Color.ORANGE);break;
+						case 8: brick.setColor(Color.RED);break;
+						case 9: brick.setColor(Color.RED);break;
+						default: break;
+					}
+					brick.setFilled(true);
+					add(brick);
+				}
+			/**}*/
 		}
 	
 /**this section starts the brick counter, score counter, and turns counter. 
